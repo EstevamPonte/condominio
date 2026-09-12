@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { createUserSchema } from './create-user.dto';
+import { createZodDto } from 'nestjs-zod';
 
 export const updateUserSchema = createUserSchema
   .pick({
@@ -14,11 +15,4 @@ export const updateUserSchema = createUserSchema
 
 export type UpdateUserType = z.infer<typeof updateUserSchema>;
 
-export class UpdateUserDto {
-  name?: string;
-  email?: string;
-  avatarURL?: string;
-  cpf?: string;
-  phone?: string;
-  status?: string;
-}
+export class UpdateUserDto extends createZodDto(updateUserSchema) {}

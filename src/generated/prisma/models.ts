@@ -11,4 +11,5 @@
 export type * from './models/Company.js'
 export type * from './models/User.js'
 export type * from './models/Session.js'
+export type * from './models/Properties.js'
 export type * from './commonInputTypes.js'

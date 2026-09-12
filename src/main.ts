@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { cleanupOpenApiDoc } from 'nestjs-zod';
 import { AppModule } from './app.module';
 import { PrismaClientExceptionFilter } from './common/filter/prisma-client-exception.filter';
 import cookieParser from 'cookie-parser';
@@ -17,8 +18,9 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('login')
     .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, cleanupOpenApiDoc(document));
 
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
   await app.listen(process.env.PORT ?? 3000);

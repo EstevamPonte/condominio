@@ -40,9 +40,10 @@ model User {
   companyId String
   company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  sessions  Session[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  sessions   Session[]
+  properties Properties[]
 
   // Garantindo que o e-mail seja único dentro do contexto da empresa
   @@unique([email, companyId])
@@ -61,4 +62,22 @@ model Session {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Properties {
+  id String @id @default(uuid())
+
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
+  description  String?
+  street       String
+  complement   String?
+  neighborhood String
+  city         String
+  state        String
+  zipCode      String
+  status       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

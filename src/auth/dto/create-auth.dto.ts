@@ -1,8 +1,12 @@
 import { z } from 'zod';
+import { createZodDto } from 'nestjs-zod';
 
 // 1. Defina o schema base (Zod)
 export const createAuthSchema = z.object({
-  email: z.string(),
+  email: z.string().meta({
+    description: 'Email cadastrado',
+    example: 'test@gmail.com',
+  }),
   password: z.string(),
 });
 
@@ -10,7 +14,4 @@ export const createAuthSchema = z.object({
 export type CreateAuthType = z.infer<typeof createAuthSchema>;
 
 // 3. O DTO para o NestJS mapear na assinatura do seu Controller
-export class CreateAuthDto {
-  email!: string;
-  password!: string;
-}
+export class CreateAuthDto extends createZodDto(createAuthSchema) {}
