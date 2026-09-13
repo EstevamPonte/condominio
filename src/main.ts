@@ -13,10 +13,10 @@ async function bootstrap() {
   const httpAdapter = app.getHttpAdapter();
 
   const config = new DocumentBuilder()
-    .setTitle('Login Template')
-    .setDescription('The login template API description')
+    .setTitle('Condominio')
+    .setDescription('API de condominios')
     .setVersion('1.0')
-    .addTag('login')
+    .addTag('condominio')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
