@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CompanyModule } from './company/company.module';
 import { AuthModule } from './auth/auth.module';
 import { ZodValidationPipe } from 'nestjs-zod';
+import { PropertiesModule } from './properties/properties.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
     }),
     CompanyModule,
     AuthModule,
+    PropertiesModule,
   ],
   controllers: [AppController],
   providers: [
