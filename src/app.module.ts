@@ -8,6 +8,7 @@ import { CompanyModule } from './company/company.module';
 import { AuthModule } from './auth/auth.module';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { PropertiesModule } from './properties/properties.module';
+import { BuildingsModule } from './buildings/buildings.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PropertiesModule } from './properties/properties.module';
     CompanyModule,
     AuthModule,
     PropertiesModule,
+    BuildingsModule,
   ],
   controllers: [AppController],
   providers: [
