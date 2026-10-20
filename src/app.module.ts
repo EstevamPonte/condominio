@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { PropertiesModule } from './properties/properties.module';
 import { BuildingsModule } from './buildings/buildings.module';
+import { UnitsModule } from './units/units.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { BuildingsModule } from './buildings/buildings.module';
     AuthModule,
     PropertiesModule,
     BuildingsModule,
+    UnitsModule,
   ],
   controllers: [AppController],
   providers: [
