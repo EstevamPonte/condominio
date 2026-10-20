@@ -45,6 +45,7 @@ model User {
   sessions   Session[]
   properties Properties[]
   buildings  Buildings[]
+  units      Units[]
 
   // Garantindo que o e-mail seja único dentro do contexto da empresa
   @@unique([email, companyId])
@@ -95,4 +96,32 @@ model Buildings {
   updatedAt DateTime @updatedAt
   userId    String?
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  units     Units[]
+}
+
+model Units {
+  id             String    @id @default(uuid())
+
+  buildingId     String
+  building       Buildings @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+
+  userId         String?
+  user           User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  code           String
+  floor          Int?
+  bedrooms       Int
+  areaSqm        Decimal?  @db.Decimal(10, 2)
+  parkingSpaces  Int       @default(0)
+  monthlyRent    Decimal   @db.Decimal(10, 2)
+  condominiumFee Decimal?  @db.Decimal(10, 2)
+  status         String    @default("available")
+  description    String?
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([buildingId, code])
+  @@index([buildingId])
+  @@index([userId])
 }
